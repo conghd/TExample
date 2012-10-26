@@ -18,7 +18,7 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE    := tetris
 LOCAL_CFLAGS	:= -Werror -Wno-psabi
-LOCAL_SRC_FILES := main.cpp App.cpp
+LOCAL_SRC_FILES := main.cpp App.cpp Shader.cpp
 LOCAL_LDLIBS    := -llog -landroid -lEGL -lGLESv2
 LOCAL_STATIC_LIBRARIES := android_native_app_glue
 

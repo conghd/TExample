@@ -17,6 +17,7 @@
 
 //BEGIN_INCLUDE(all)
 #include "Engine.h"
+#include "App.h"
 
 /**
  * Our saved state data.
@@ -50,6 +51,7 @@ struct engine {
  * Initialize an EGL context for the current display.
  */
 static int engine_init_display(struct engine* engine) {
+	LOGD("engine_init_display");
     // initialize OpenGL ES and EGL
 
     /*
@@ -113,9 +115,11 @@ static int engine_init_display(struct engine* engine) {
 
     // Initialize GL state.
 //    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST);
-//    glEnable(GL_CULL_FACE);
+    glEnable(GL_CULL_FACE);
 //    glShadeModel(GL_SMOOTH);
     glDisable(GL_DEPTH_TEST);
+
+    App::sharedNew(w, h, engine->state.angle);
 
     return 0;
 }
@@ -134,6 +138,7 @@ static void engine_draw_frame(struct engine* engine) {
             ((float)engine->state.y)/engine->height, 1);
     glClear(GL_COLOR_BUFFER_BIT);
 
+    App::shared->renderFrame();
     eglSwapBuffers(engine->display, engine->surface);
 }
 
@@ -141,7 +146,9 @@ static void engine_draw_frame(struct engine* engine) {
  * Tear down the EGL context currently associated with the display.
  */
 static void engine_term_display(struct engine* engine) {
+	LOGD("engine_term_display()");
     if (engine->display != EGL_NO_DISPLAY) {
+    	App::sharedDelete();
         eglMakeCurrent(engine->display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
         if (engine->context != EGL_NO_CONTEXT) {
             eglDestroyContext(engine->display, engine->context);
@@ -151,6 +158,7 @@ static void engine_term_display(struct engine* engine) {
         }
         eglTerminate(engine->display);
     }
+
     engine->animating = 0;
     engine->display = EGL_NO_DISPLAY;
     engine->context = EGL_NO_CONTEXT;
@@ -161,6 +169,7 @@ static void engine_term_display(struct engine* engine) {
  * Process the next input event.
  */
 static int32_t engine_handle_input(struct android_app* app, AInputEvent* event) {
+	LOGD("engine_handle_input()");
     struct engine* engine = (struct engine*)app->userData;
     if (AInputEvent_getType(event) == AINPUT_EVENT_TYPE_MOTION) {
         engine->animating = 1;
@@ -175,6 +184,7 @@ static int32_t engine_handle_input(struct android_app* app, AInputEvent* event) 
  * Process the next main command.
  */
 static void engine_handle_cmd(struct android_app* app, int32_t cmd) {
+	LOGD("engine_handle_cmd()");
     struct engine* engine = (struct engine*)app->userData;
     switch (cmd) {
         case APP_CMD_SAVE_STATE:
@@ -272,9 +282,9 @@ void android_main(struct android_app* state) {
                     ASensorEvent event;
                     while (ASensorEventQueue_getEvents(engine.sensorEventQueue,
                             &event, 1) > 0) {
-                        LOGI("accelerometer: x=%f y=%f z=%f",
-                                event.acceleration.x, event.acceleration.y,
-                                event.acceleration.z);
+//                        LOGI("accelerometer: x=%f y=%f z=%f",
+//                                event.acceleration.x, event.acceleration.y,
+//                                event.acceleration.z);
                     }
                 }
             }

@@ -16,25 +16,31 @@
 #include <android/sensor.h>
 #include <android/log.h>
 #include <android_native_app_glue.h>
-#include <android/native_window.h>
+//#include <android/native_window.h>
+
+#include "types.h"
+#include "Log.h"
 
 #define LOG_TAG "Engine"
 
+#ifndef __IPHONE_4_0
+#define __IPHONE_4_0
+#endif
 
-#define  LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__)
-#define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
-#define  LOGW(...)  __android_log_print(ANDROID_LOG_WARN,LOG_TAG,__VA_ARGS__)
+#ifdef __ANDROID
+#undef __ANDROID
+#endif
 
-//static void printGLString(const char *name, GLenum s) {
-//    const char *v = (const char *) glGetString(s);
-//    LOGI("GL %s = %s\n", name, v);
-//}
+static void printGLString(const char *name, GLenum s) {
+    const char *v = (const char *) glGetString(s);
+    LOGI("GL %s = %s\n", name, v);
+}
 
-//static void checkGlError(const char* op) {
-//    for (GLint error = glGetError(); error; error
-//            = glGetError()) {
-//        LOGI("after %s() glError (0x%x)\n", op, error);
-//    }
-//}
+static void checkGlError(const char* op) {
+    for (GLint error = glGetError(); error; error
+            = glGetError()) {
+        LOGI("after %s() glError (0x%x)\n", op, error);
+    }
+}
 
 #endif
