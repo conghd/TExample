@@ -1,5 +1,5 @@
 /*
- * Shader.cpp
+ * Program.cpp
  * Copyright (C) 2012 HanoiLabs
  *
  */
@@ -46,9 +46,9 @@ unsigned char Program::loadGfx(PROGRAM_BIND_ATTRIB_CALLBACK *program_bind_attrib
 
 Program::~Program() {
 	if (uniform_array)
-		free uniform_array;
+		free(uniform_array);
 	if (vertex_attrib_array)
-		free vertex_attrib_array;
+		free(vertex_attrib_array);
 
 	if (this->id) {
 		glDeleteProgram(this->id);

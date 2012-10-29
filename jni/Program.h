@@ -1,5 +1,5 @@
 /*
- * Shader.cpp
+ * Program.h.
  * Copyright (C) 2012 HanoiLabs
  *
  */
@@ -31,10 +31,10 @@ typedef void(PROGRAM_BIND_ATTRIB_CALLBACK(void*));
 
 class Program {
 public:
-	char *name[MAX_CHAR];
+	char name[MAX_CHAR];
 	Shader *vertex_shader;
 	Shader *fragment_shader;
-	unsigned int pid;
+	unsigned int id;
 	unsigned char uniform_count;
 
 	UNIFORM *uniform_array;
@@ -45,7 +45,8 @@ public:
 	PROGRAM_BIND_ATTRIB_CALLBACK *program_bind_attrib_callback;
 
 public:
-	Program(char *name, char *vertex_shader_filename, char *fragment_shader_filename, unsigned char relative_path,
+	Program(char *name, char *vertex_shader_filename, char *fragment_shader_filename,
+			unsigned char relative_path,
 			unsigned char debug_shader, PROGRAM_BIND_ATTRIB_CALLBACK *program_bind_attrib_callback,
 			PROGRAM_DRAW_CALLBACK *program_draw_callback);
 	unsigned char link(unsigned char debug);

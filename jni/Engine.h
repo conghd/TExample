@@ -23,12 +23,12 @@
 
 #define LOG_TAG "Engine"
 
-#ifndef __IPHONE_4_0
-#define __IPHONE_4_0
+#ifdef __IPHONE_4_0
+#undef __IPHONE_4_0
 #endif
 
-#ifdef __ANDROID
-#undef __ANDROID
+#ifndef __ANDROID
+#define __ANDROID
 #endif
 
 static void printGLString(const char *name, GLenum s) {
