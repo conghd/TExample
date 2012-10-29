@@ -1,4 +1,4 @@
-# Copyright (C) 2010 The Android Open Source Project
+# Copyright (C) 2009 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,21 +16,27 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_MODULE    := tetris
-LOCAL_CFLAGS	:= -Werror -Wno-psabi
+LOCAL_CFLAGS := 
+
+LOCAL_MODULE    := libpng
 LOCAL_SRC_FILES :=\
-	main.cpp \
-	App.cpp \
-	Shader.cpp \
-	Program.cpp \
-	Utils.cpp \
+	png.c \
+	pngerror.c \
+	pngget.c \
+	pngmem.c \
+	pngpread.c \
+	pngread.c \
+	pngrio.c \
+	pngrtran.c \
+	pngrutil.c \
+	pngset.c \
+	pngtrans.c \
+	pngwio.c \
+	pngwrite.c \
+	pngwtran.c \
+	pngwutil.c 
 	
-LOCAL_LDLIBS    := -llog -landroid -lEGL -lGLESv2
-LOCAL_STATIC_LIBRARIES := \
-	android_native_app_glue \
-	png \
-	zip \
+LOCAL_LDLIBS := -lz
 
-include $(BUILD_SHARED_LIBRARY)
-
-$(call import-module,android/native_app_glue)
+#include $(BUILD_SHARED_LIBRARY)
+include $(BUILD_STATIC_LIBRARY)

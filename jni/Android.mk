@@ -14,14 +14,4 @@
 #
 LOCAL_PATH := $(call my-dir)
 
-include $(CLEAR_VARS)
-
-LOCAL_MODULE    := tetris
-LOCAL_CFLAGS	:= -Werror -Wno-psabi
-LOCAL_SRC_FILES := main.cpp App.cpp Shader.cpp Program.cpp Utils.cpp
-LOCAL_LDLIBS    := -llog -landroid -lEGL -lGLESv2
-LOCAL_STATIC_LIBRARIES := android_native_app_glue
-
-include $(BUILD_SHARED_LIBRARY)
-
-$(call import-module,android/native_app_glue)
+include $(call all-subdir-makefiles)
