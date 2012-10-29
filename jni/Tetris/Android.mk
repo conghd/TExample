@@ -19,6 +19,7 @@ include $(CLEAR_VARS)
 LOCAL_MODULE    := tetris
 LOCAL_CFLAGS	:= -Werror -Wno-psabi
 LOCAL_SRC_FILES :=\
+	AssetManager.cpp \
 	main.cpp \
 	App.cpp \
 	Shader.cpp \
