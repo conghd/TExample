@@ -31,6 +31,7 @@ LOCAL_STATIC_LIBRARIES := \
 	android_native_app_glue \
 	png \
 	zip \
+	zlib \
 
 include $(BUILD_SHARED_LIBRARY)
 
