@@ -2,17 +2,16 @@
 
 App *App::shared = NULL;
 
-void App::sharedNew(int w, int h, float grey) {
-	shared = new App(w, h, grey);
+void App::sharedNew() {
+	shared = new App();
 }
 
 void App::sharedDelete() {
 	delete shared;
 }
 
-App::App(int w, int h, float grey) {
-	setupGraphics(w, h);
-	this->grey = grey;
+App::App() {
+	this->grey = 0;
 }
 
 App::~App() {

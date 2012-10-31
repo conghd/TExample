@@ -21,7 +21,7 @@ class App {
 public:
 	static App *shared;
 
-	App(int w, int h, float angle);
+	App();
 	~App();
 
 	GLuint gProgram;
@@ -31,7 +31,7 @@ public:
 
 	float grey;
 
-	static void sharedNew(int w, int h, float grey);
+	static void sharedNew();
 	static void sharedDelete();
 
 	static void printGLString(const char *name, GLenum s);

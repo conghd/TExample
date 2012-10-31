@@ -115,11 +115,10 @@ static int engine_init_display(struct engine* engine) {
 
     // Initialize GL state.
 //    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST);
-    glEnable(GL_CULL_FACE);
+//    glEnable(GL_CULL_FACE);
 //    glShadeModel(GL_SMOOTH);
-    glDisable(GL_DEPTH_TEST);
-
-    App::sharedNew(w, h, engine->state.angle);
+//    glDisable(GL_DEPTH_TEST);
+    App::shared->setupGraphics(w, h);
 
     return 0;
 }
@@ -238,6 +237,7 @@ void android_main(struct android_app* state) {
 
     // Make sure glue isn't stripped.
     app_dummy();
+    App::sharedNew();
 
     memset(&engine, 0, sizeof(engine));
     state->userData = &engine;

@@ -16,9 +16,8 @@
 #include <android/sensor.h>
 #include <android/log.h>
 #include <android_native_app_glue.h>
-//#include <android/native_window.h>
 
-#include "types.h"
+#include "Types.h"
 #include "Log.h"
 
 #define LOG_TAG "Engine"
