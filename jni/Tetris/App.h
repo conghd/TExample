@@ -1,6 +1,7 @@
 #ifndef _APP_H_
 #define _APP_H_
 
+#include "Program.h"
 #include "Engine.h"
 
 static const char gVertexShader[] =
@@ -24,10 +25,9 @@ public:
 	App();
 	~App();
 
-	GLuint gProgram;
 	GLuint gvPositionHandle;
-	GLuint vertexShader;
-	GLuint fragShader;
+	Program *program;
+
 
 	float grey;
 

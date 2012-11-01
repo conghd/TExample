@@ -12,6 +12,10 @@ Shader::Shader(char *name, unsigned int type) {
 	this->id = 0;
 }
 
+GLuint Shader::getId() {
+	return this->id;
+}
+
 Shader::~Shader() {
 	if (this->id) {
 		glDeleteShader(this->id);
@@ -19,8 +23,18 @@ Shader::~Shader() {
 	}
 }
 
-unsigned char Shader::compile(const char *code, unsigned char debug) {
-	if (this->id) return 0;
+GLuint Shader::compile(const char *code, unsigned char debug) {
+	if ((this->id) || code == NULL) {
+		if (debug) {
+			char shaderName[MAX_CHAR] = {""};
+			if (this->type == GL_VERTEX_SHADER)
+				strcpy(shaderName, GL_VERTEX_SHADER_NAME);
+			else
+				strcpy(shaderName, GL_FRAGMENT_SHADER_NAME);
+			LOGD("[ %s:%s ] Compilation failed, source: %s\n", this->name, shaderName, code);
+		}
+		return 0;
+	}
 	this->id = glCreateShader(this->type);
 
 	if (this->id) {

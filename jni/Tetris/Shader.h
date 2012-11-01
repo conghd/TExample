@@ -16,10 +16,14 @@ class Shader {
 public:
 	char name[MAX_CHAR];
 	unsigned int type;
-	unsigned int id;
+private:
+	GLuint id;
+
+public:
 
 	Shader(char *name, unsigned int type);
+	GLuint getId();
 	~Shader();
-	unsigned char compile(const char *code, unsigned char debug);
+	GLuint compile(const char *code, unsigned char debug);
 };
 #endif
