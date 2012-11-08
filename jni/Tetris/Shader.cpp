@@ -23,7 +23,13 @@ Shader::~Shader() {
 	}
 }
 
-GLuint Shader::compile(const char *code, unsigned char debug) {
+GLuint Shader::compile(const char *filename, unsigned char debug) {
+	char *source = NULL;
+	int len = 0;
+	TAssetManager::shared->readFile(&source, &len, filename);
+	LOGD("SOURCE: %s", source);
+	const char *code = (const char*)source;
+	LOGD("SOURCE: %s", code);
 	if ((this->id) || code == NULL) {
 		if (debug) {
 			char shaderName[MAX_CHAR] = {""};
@@ -38,7 +44,7 @@ GLuint Shader::compile(const char *code, unsigned char debug) {
 	this->id = glCreateShader(this->type);
 
 	if (this->id) {
-		glShaderSource(this->id, 1, &code, NULL);
+		glShaderSource(this->id, 1, &code, &len);
 		glCompileShader(this->id);
 		if (debug) {
 			char shaderName[MAX_CHAR] = {""};
@@ -69,6 +75,8 @@ GLuint Shader::compile(const char *code, unsigned char debug) {
 			}
 		}
 	}
+
+	free(source);
 
 	return this->id;
 }

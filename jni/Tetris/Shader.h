@@ -8,6 +8,7 @@
 #define SHADER_H
 
 #include "Engine.h"
+#include "TAssetManager.h"
 
 #define GL_VERTEX_SHADER_NAME "GL_VERTEX_SHADER"
 #define GL_FRAGMENT_SHADER_NAME "GL_FRAGMENT_SHADER"

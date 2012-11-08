@@ -10,10 +10,12 @@ Program::Program(const char* pVertexSource, const char* pFragmentSource) {
 	this->id = 0;
 
 	vertexShader = new Shader((char *)GL_VERTEX_SHADER_NAME, GL_VERTEX_SHADER);
+	LOGD("NAME: %s", pVertexSource);
 	vertexShader->compile(pVertexSource, 1);
 	if (!vertexShader->getId()) return;
 
 	fragmentShader = new Shader((char *)GL_FRAGMENT_SHADER_NAME, GL_FRAGMENT_SHADER);
+	LOGD("NAME: %s", pFragmentSource);
 	fragmentShader->compile(pFragmentSource, 1);
 	if (!fragmentShader->getId()) return;
 

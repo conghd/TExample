@@ -24,6 +24,7 @@ LOCAL_SRC_FILES :=\
 	App.cpp \
 	Shader.cpp \
 	Program.cpp \
+	TAssetManager.cpp \
 	Utils.cpp \
 	
 LOCAL_LDLIBS    := -llog -landroid -lEGL -lGLESv2

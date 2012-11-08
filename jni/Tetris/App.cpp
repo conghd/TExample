@@ -109,7 +109,8 @@ bool App::setupGraphics(int w, int h) {
 
     LOGI("setupGraphics(%d, %d)", w, h);
 //    gProgram = createProgram(gVertexShader, gFragmentShader);
-    program = new Program(gVertexShader, gFragmentShader);
+//    program = new Program(gVertexShader, gFragmentShader);
+    program = new Program("glsl/simpleVertexShader.glsl", "glsl/simpleFragShader.glsl");
 //    if (!gProgram) {
     if (!program->getId()) {
         LOGE("Could not create program.");

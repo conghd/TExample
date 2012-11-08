@@ -18,6 +18,7 @@
 //BEGIN_INCLUDE(all)
 #include "Engine.h"
 #include "App.h"
+#include "TAssetManager.h"
 
 /**
  * Our saved state data.
@@ -118,6 +119,7 @@ static int engine_init_display(struct engine* engine) {
 //    glEnable(GL_CULL_FACE);
 //    glShadeModel(GL_SMOOTH);
 //    glDisable(GL_DEPTH_TEST);
+    TAssetManager::sharedNew(engine->app->activity->assetManager);
     App::shared->setupGraphics(w, h);
 
     return 0;
@@ -147,6 +149,7 @@ static void engine_draw_frame(struct engine* engine) {
 static void engine_term_display(struct engine* engine) {
 	LOGD("engine_term_display()");
     if (engine->display != EGL_NO_DISPLAY) {
+    	TAssetManager::sharedDelete();
     	App::sharedDelete();
         eglMakeCurrent(engine->display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
         if (engine->context != EGL_NO_CONTEXT) {
@@ -174,6 +177,7 @@ static int32_t engine_handle_input(struct android_app* app, AInputEvent* event) 
         engine->animating = 1;
         engine->state.x = AMotionEvent_getX(event, 0);
         engine->state.y = AMotionEvent_getY(event, 0);
+
         return 1;
     }
     return 0;
