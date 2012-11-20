@@ -1,5 +1,5 @@
 /*
- * Program.h.
+ * Program.h
  * Copyright (C) 2012 HanoiLabs
  *
  */
@@ -31,15 +31,16 @@ typedef void(PROGRAM_BIND_ATTRIB_CALLBACK(void*));
 
 class Program {
 private:
-//	char name[MAX_CHAR];
+	char name[MAX_CHAR];
 	Shader *vertexShader;
 	Shader *fragmentShader;
 	GLuint id;
-//	unsigned char uniform_count;
 
-//	UNIFORM *uniform_array;
-//	unsigned char vertex_attrib_count;
-//	VERTEX_ATTRIB *vertex_attrib_array;
+	unsigned char numUniforms;
+	UNIFORM *uniforms;
+
+	unsigned char numVertexAttribs;
+	VERTEX_ATTRIB *vertexAttribs;
 
 //	PROGRAM_DRAW_CALLBACK *program_draw_callback;
 //	PROGRAM_BIND_ATTRIB_CALLBACK *program_bind_attrib_callback;
@@ -52,8 +53,8 @@ public:
 //	unsigned char link(unsigned char debug);
 //	void setDrawCallback(PROGRAM_DRAW_CALLBACK *program_draw_callback);
 //	void setBindAttribLocationCallback(PROGRAM_BIND_ATTRIB_CALLBACK *program_bind_attrib_callback);
-//	char getVertexAttribLocation(char *name);
-//	char getUniformLocation(char *name);
+	GLuint getVertexAttribLocation(const char *name);
+	GLuint getUniformLocation(const char *name);
 //	void draw();
 //	void reset();
 //	unsigned char loadGfx(PROGRAM_BIND_ATTRIB_CALLBACK *program_bind_attrib_callback,

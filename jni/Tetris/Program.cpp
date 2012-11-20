@@ -65,13 +65,22 @@ GLuint Program::getId() {
 //
 //}
 
-//char Program::getVertexAttribLocation(char *name) {
-//
-//}
+GLuint Program::getVertexAttribLocation(const char *name) {
+	if (name == NULL || id == 0) return 0;
+	return glGetAttribLocation(id, name);
+}
 
-//char Program::getUniformLocation(char *name) {
-//
-//}
+GLuint Program::getUniformLocation(const char *name) {
+	unsigned char i = 0;
+	while (i != numUniforms) {
+		if (!strcmp(uniforms[i].name, name)) {
+			return uniforms[i].location;
+		}
+		i++;
+	}
+
+	return -1;
+}
 
 //void Program::draw() {
 //

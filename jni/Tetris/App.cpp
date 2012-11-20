@@ -116,8 +116,7 @@ bool App::setupGraphics(int w, int h) {
         LOGE("Could not create program.");
         return false;
     }
-//    gvPositionHandle = glGetAttribLocation(gProgram, "vPosition");
-    gvPositionHandle = glGetAttribLocation(program->getId(), "vPosition");
+    gvPositionHandle = program->getVertexAttribLocation("vPosition");
     checkGlError("glGetAttribLocation");
     LOGI("glGetAttribLocation(\"vPosition\") = %d\n",
             gvPositionHandle);
