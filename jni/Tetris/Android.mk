@@ -21,12 +21,15 @@ LOCAL_CFLAGS	:= -Werror -Wno-psabi
 LOCAL_SRC_FILES :=\
 	AssetManager.cpp \
 	App.cpp \
+	Director.cpp \
 	esUtils.cpp \
 	main.cpp \
+	Matrix.cpp \
 	Program.cpp \
 	Shader.cpp \
 	TAssetManager.cpp \
 	Utils.cpp \
+	Vector.cpp \
 	
 LOCAL_LDLIBS    := -llog -landroid -lEGL -lGLESv2
 LOCAL_STATIC_LIBRARIES := \
