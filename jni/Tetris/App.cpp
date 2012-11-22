@@ -117,7 +117,7 @@ bool App::setupGraphics(int w, int h) {
     LOGI("setupGraphics(%d, %d)", w, h);
 //    gProgram = createProgram(gVertexShader, gFragmentShader);
 //    program = new Program(gVertexShader, gFragmentShader);
-    program = new Program("glsl/simpleVertexShader.glsl", "glsl/simpleFragShader.glsl");
+    program = new Program("glsl/simpleVertexShader.vsh", "glsl/simpleFragShader.fsh");
 //    if (!gProgram) {
     if (!program->getId()) {
         LOGE("Could not create program.");
@@ -134,19 +134,14 @@ bool App::setupGraphics(int w, int h) {
 
     float half_width = (float) w * 0.5f;
     float half_height = (float) h * 0.5f;
-    LOGD("===== 1");
     Director::shared->setMatrixMode(PROJECTION_MATRIX);
-    LOGD("===== 2");
     Director::shared->loadIdentity();
-    LOGD("===== 3");
     Director::shared->setOrthoGraphic2D(-half_width,
     							 	 	 half_width,
     							 	 	-half_height,
     							 	 	 half_height);
-    LOGD("===== 4");
     Director::shared->translate(-half_width, -half_height, 0.0f);
 //    Director::shared->translate(0.0f, 0.0f, 0.0f);
-    LOGD("===== 5");
     glDisable(GL_DEPTH_TEST);
     glDepthMask(GL_FALSE);
 
