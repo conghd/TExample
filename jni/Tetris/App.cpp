@@ -208,6 +208,7 @@ void App::renderFrame() {
 //		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, triangle_indices);
 //		glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_SHORT, triangle_strip_indices);
 		glDrawElements(GL_TRIANGLE_FAN, 4, GL_UNSIGNED_SHORT, triangle_fan_indices);
+		checkGlError("glDrawElements");
 //		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 //		checkGlError("glDrawArrays");
     }
