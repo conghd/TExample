@@ -10,10 +10,10 @@ TAssetManager *TAssetManager::shared = NULL;
 
 void TAssetManager::sharedNew(AAssetManager *assetManager) {
 	shared = new TAssetManager(assetManager);
-	char *buffer = NULL;
-	int length = 0;
-	shared->readFile(&buffer, &length, "glsl/simpleFragShader.glsl");
-	free(buffer);
+//	char *buffer = NULL;
+//	int length = 0;
+//	shared->readFile(&buffer, &length, "glsl/simpleFragShader.glsl");
+//	free(buffer);
 }
 
 void TAssetManager::sharedDelete() {

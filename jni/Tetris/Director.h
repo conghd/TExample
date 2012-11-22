@@ -36,6 +36,10 @@ private:
 	mat3 normalMatrix;
 
 public:
+	static Director *shared;
+
+	static void sharedNew();
+	static void sharedDelete();
 	Director();
 	~Director();
 

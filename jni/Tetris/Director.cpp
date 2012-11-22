@@ -11,8 +11,20 @@
 	PFNGLDELETEVERTEXARRAYSOESPROC	glDeleteVertexArraysOES;
 #endif
 
-Director::Director() {
+Director *Director::shared = NULL;
+void Director::sharedNew() {
+	shared = new Director();
+}
 
+void Director::sharedDelete() {
+	delete shared;
+}
+
+Director::Director() {
+	matrixMode = MODELVIEW_MATRIX;
+	modelviewMatrixIndex = 0;
+	projectionMatrixIndex = 0;
+	textureMatrixIndex = 0;
 }
 
 Director::~Director() {
@@ -106,6 +118,7 @@ void Director::error( void )
 		}
 
 //		console_print( "[ GL_ERROR ]\nERROR: %s\n", str );
+		LOGD( "[ GL_ERROR ]\nERROR: %s\n", str );
 	}
 }
 
@@ -353,7 +366,9 @@ void Director::scale( float x, float y, float z )
 
 
 mat4 *Director::getModelviewMatrix( void )
-{ return &modelviewMatrix[ modelviewMatrixIndex ]; }
+{
+	return &modelviewMatrix[modelviewMatrixIndex];
+}
 
 
 mat4 *Director::getProjectionMatrix( void )

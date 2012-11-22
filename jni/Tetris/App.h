@@ -3,6 +3,7 @@
 
 #include "Program.h"
 #include "Engine.h"
+#include "Director.h"
 
 static const char gVertexShader[] =
 			  "attribute vec4 vPosition;\n"
@@ -32,6 +33,8 @@ public:
 
 
 	float grey;
+	int screenWidth;
+	int screenHeight;
 
 	static void sharedNew();
 	static void sharedDelete();
