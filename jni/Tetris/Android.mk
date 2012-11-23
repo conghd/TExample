@@ -18,18 +18,27 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE    := tetris
 LOCAL_CFLAGS	:= -Werror -Wno-psabi
-LOCAL_SRC_FILES :=\
-	AssetManager.cpp \
-	App.cpp \
-	Director.cpp \
-	esUtils.cpp \
-	main.cpp \
-	Matrix.cpp \
-	Program.cpp \
-	Shader.cpp \
-	TAssetManager.cpp \
-	Utils.cpp \
-	Vector.cpp \
+	
+#SRC_DIRS		:= $(LOCAL_PATH)/Screens
+#LOCAL_SRC_FILES += $(foreach sdir, $(SRC_DIRS), $(wildcard $(sdir)/*.cpp))
+#LOCAL_SRC_FILES += $(wildcard $(LOCAL_PATH)/*/*.cpp)
+FILE_LIST := $(wildcard $(LOCAL_PATH)/*.cpp)
+FILE_LIST += $(wildcard $(LOCAL_PATH)/**/*.cpp)
+
+#LOCAL_SRC_FILES :=\
+#	AssetManager.cpp \
+#	App.cpp \
+#	Director.cpp \
+#	esUtils.cpp \
+#	main.cpp \
+#	Matrix.cpp \
+#	Program.cpp \
+#	Shader.cpp \
+#	TAssetManager.cpp \
+#	Utils.cpp \
+#	Vector.cpp \
+
+LOCAL_SRC_FILES := $(FILE_LIST:$(LOCAL_PATH)/%=%)
 	
 LOCAL_LDLIBS    := -llog -landroid -lEGL -lGLESv2
 LOCAL_STATIC_LIBRARIES := \
