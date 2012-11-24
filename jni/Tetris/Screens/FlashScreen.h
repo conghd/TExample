@@ -7,12 +7,18 @@
 #ifndef FLASH_SCREEN_H
 #define FLASH_SCREEN_H
 
-#include "../Engine.h"
 #include "../Vector.h"
 #include "../Matrix.h"
+#include "Screen.h"
+#include "../Director.h"
+#include "../Objects/Box.h"
 
-class FlashScreen {
+class FlashScreen : Screen {
+private:
+	Box *box;
+
 public:
+	static const char *TAG;
 	FlashScreen();
 	~FlashScreen();
 

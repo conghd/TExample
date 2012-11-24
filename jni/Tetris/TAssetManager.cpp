@@ -7,13 +7,17 @@
 #include "TAssetManager.h"
 
 TAssetManager *TAssetManager::shared = NULL;
+const char *TAssetManager::TAG = "TAssetManager";
 
 void TAssetManager::sharedNew(AAssetManager *assetManager) {
 	shared = new TAssetManager(assetManager);
-//	char *buffer = NULL;
-//	int length = 0;
-//	shared->readFile(&buffer, &length, "glsl/simpleFragShader.glsl");
-//	free(buffer);
+	LOGD(TAG, "start:sharedNew()");
+	char *buffer = NULL;
+	int length = 0;
+	shared->readFile(&buffer, &length, "glsl/simpleFragShader.fsh");
+	LOGD(TAG, "CONTENT: %s", buffer);
+	free(buffer);
+	LOGD(TAG, "end:sharedNew()");
 }
 
 void TAssetManager::sharedDelete() {
@@ -32,7 +36,7 @@ void TAssetManager::readFile(char **outBuffer, int *outLength, const char *filen
 	if (filename == NULL) return;
 	AAsset* assetFile = AAssetManager_open(assetManager, filename, AASSET_MODE_BUFFER);
 	if (!assetFile) {
-		LOGD("Could not open the specified file...");
+		LOGD(TAG, "Could not open the specified file...");
 		return;
 	}
 
@@ -40,7 +44,7 @@ void TAssetManager::readFile(char **outBuffer, int *outLength, const char *filen
 	*outBuffer = (char *) malloc(sizeof(char) * (*outLength));
 	int count;
 	while (((count = AAsset_read(assetFile, *outBuffer, *outLength)) > 0)) {
-		LOGD("CONTENT: %s", *outBuffer);
+		LOGD(TAG, "CONTENT: %s", *outBuffer);
 	}
 	AAsset_close(assetFile);
 }

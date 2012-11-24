@@ -1,11 +1,15 @@
 /*
- * BasicScreen.h
+ * Screen.h
  * Copyright (c) 2012 HanoiLabs
  *
  */
 
-class BasicScreen {
+#include <Engine.h>
+#include <Director.h>
+#include <Program.h>
+
+class Screen {
 public:
-	void draw(void);
-	void update(void);
+	virtual void draw(void);
+	virtual void update(void);
 };

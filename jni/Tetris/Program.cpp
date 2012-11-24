@@ -6,6 +6,8 @@
 
 #include "Program.h"
 
+const char *Program::TAG = "Program";
+
 Program::Program(const char* pVertexSource, const char* pFragmentSource) {
 	this->id = 0;
 	this->numUniforms = 0;
@@ -15,12 +17,12 @@ Program::Program(const char* pVertexSource, const char* pFragmentSource) {
 	vertexAttribs = NULL;
 
 	vertexShader = new Shader((char *)GL_VERTEX_SHADER_NAME, GL_VERTEX_SHADER);
-	LOGD("NAME: %s", pVertexSource);
+	LOGD(TAG, "NAME: %s", pVertexSource);
 	vertexShader->compile(pVertexSource, 1);
 	if (!vertexShader->getId()) return;
 
 	fragmentShader = new Shader((char *)GL_FRAGMENT_SHADER_NAME, GL_FRAGMENT_SHADER);
-	LOGD("NAME: %s", pFragmentSource);
+	LOGD(TAG, "NAME: %s", pFragmentSource);
 	fragmentShader->compile(pFragmentSource, 1);
 	if (!fragmentShader->getId()) return;
 
