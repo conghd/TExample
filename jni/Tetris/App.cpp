@@ -127,11 +127,6 @@ bool App::setupGraphics(int w, int h) {
 
     LOGI("App", "setupGraphics(%d, %d)", w, h);
 
-//    gvPositionHandle = program->getVertexAttribLocation("vPosition");
-//    checkGlError("glGetAttribLocation");
-//    LOGI("glGetAttribLocation(\"vPosition\") = %d\n",
-//            gvPositionHandle);
-
     glViewport(0, 0, w, h);
     checkGlError("glViewport");
 
@@ -160,12 +155,4 @@ void App::renderFrame() {
 
     if (isRenderable)
 		currentScreen->draw();
-
-
-//    glVertexAttribPointer(gvPositionHandle, 2, GL_FLOAT, GL_FALSE, 0, gTriangleVertices);
-//    checkGlError("glVertexAttribPointer");
-//    glEnableVertexAttribArray(gvPositionHandle);
-//    checkGlError("glEnableVertexAttribArray");
-//    glDrawArrays(GL_TRIANGLES, 0, 3);
-//    checkGlError("glDrawArrays");
 }
