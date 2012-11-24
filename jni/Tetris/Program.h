@@ -50,6 +50,7 @@ private:
 	unsigned char addVertexAttrib(char *name, unsigned char type);
 
 public:
+	static const char *TAG;
 //	Program(char *name, char *vertex_shader_filename, char *fragment_shader_filename,
 //			unsigned char relative_path,
 //			unsigned char debug_shader, PROGRAM_BIND_ATTRIB_CALLBACK *program_bind_attrib_callback,

@@ -1,6 +1,6 @@
 /*
  * Matrix.h
- * Copyright (R) Oct 2012, Hanoilabs
+ * Copyright (c) Oct 2012, Hanoilabs
  *
  */
 

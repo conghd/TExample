@@ -15,6 +15,7 @@ private:
 
 public:
 
+	static const char *TAG;
 	static TAssetManager *shared;
 
 	static void sharedNew(AAssetManager *assetManager);

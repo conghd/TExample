@@ -20,6 +20,7 @@ enum {
 	TEXTURE_MATRIX		= 2
 };
 
+
 class Director {
 private:
 	unsigned char matrixMode;
@@ -34,6 +35,7 @@ private:
 	mat4 modelviewProjectionMatrix;
 
 	mat3 normalMatrix;
+
 
 public:
 	static Director *shared;
@@ -75,6 +77,8 @@ public:
 			int *viewportMatrix, float *winx, float *winy, float *winz);
 	int unproject(float winx, float winy, float winz, mat4 *modelviewMatrix, mat4 *projectionMatrix,
 			int *viewportMatrix, float *objx, float *objy, float *objz);
+
+
 };
 
 #endif
