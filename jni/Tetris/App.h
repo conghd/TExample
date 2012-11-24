@@ -1,5 +1,5 @@
-#ifndef _APP_H_
-#define _APP_H_
+#ifndef APP_H
+#define APP_H
 
 #include "Program.h"
 #include "Engine.h"

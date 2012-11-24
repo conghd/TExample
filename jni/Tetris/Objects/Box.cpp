@@ -5,6 +5,7 @@
  */
 
 #include "Box.h"
+#include "../App.h"
 
 const char *Box::TAG = "Box";
 
@@ -17,8 +18,6 @@ Box::Box(float x, float y, float width, float height) :
 		return;
 	}
 
-	float screenWidth = 720.0f;
-	float screenHeight = 1280.0f;
 	vertices = (float *) malloc(8 * sizeof(float));
 	vertices[0] = vertices[2] = x;
 	vertices[4] = vertices[6] = width + x;
@@ -51,18 +50,50 @@ Box::~Box() {
 }
 
 void Box::draw() {
-	Director::shared->setMatrixMode(MODELVIEW_MATRIX);
-	Director::shared->loadIdentity();
-	vec3 e = { 0.0f, -3.0f, 0.0f };
-	vec3 c = { 0.0f, 0.0f, 0.0f };
-	vec3 u = { 0.0f, 0.0f, 1.0f };
-//	Director::shared->lookAt(&e, &c, &u);
+//	Director::shared->setMatrixMode(PROJECTION_MATRIX);
+//	Director::shared->loadIdentity();
+//	Director::shared->setPerspective(45.0f,
+//			(float) App::shared->getScreenWidth() / (float) App::shared->getScreenHeight(),
+//			0.01f,
+//			100.0f,
+//			0.0f);
+//	glDisable(GL_CULL_FACE);
+
+//	vec3 e = { 0.0f, 0.0f, -1000.0f }; // eye
+	vec3 c = {0.0f, 0.0f, 0.0f };	// center
+	vec3 u = { 0.0f, 0.0f, 1.0f };	// up
+
+//	vec3 e = { App::shared->getScreenWidth(), App::shared->getScreenHeight(), 1000.0f }; // eye
+	vec3 e = { -0.0f, -0.0f, -5.0f }; // eye
+//	vec3 c = { App::shared->getScreenWidth() / 2.0f, App::shared->getScreenHeight() / 2.0f, 0.0f };	// center
+//	vec3 u = { 0.0f, 0.0f, 1.0f };	// up
+	Director::shared->lookAt(&e, &c, &u);
+
 	static float y = 0.0f;
+//	static const float POSITION[ 12 ] = {
+//		0.0f, 0.0f, 0.0f, // Bottom left
+//		720.0f, 0.0f, 0.0f,
+//		0.0f, 1280.0f,  0.0f,
+//		360.0f, 1280.0f,  0.0f // Top right
+//		};
+	static const float POSITION[ 12 ] = {
+		-0.5f, 0.0f, -0.5f, // Bottom left
+		 0.5f, 0.0f, -0.5f,
+		-0.5f, 0.0f,  0.5f,
+		 0.5f, 0.0f,  0.5f // Top right
+		};
+
+	static const float COLOR[ 16 ] = {
+	1.0f, 0.0f, 0.0f, 1.0f, // Red
+	0.0f, 1.0f, 0.0f, 1.0f, // Green
+	0.0f, 0.0f, 1.0f, 1.0f, // Blue
+	1.0f, 1.0f, 0.0f, 1.0f  // Yellow
+	};
 	y += 0.1f;
-	Director::shared->translate(720 / 2, 1280/ 2, 0.0f);
-	Director::shared->rotate(y * 50.0f, 0.0f, 0.0f, 1.0f);
-	Director::shared->translate(-720/ 2, -1280/ 2, 0.0f);
-//	Director::shared->scale(1.0f, 1.0f, 0.0f);
+//	Director::shared->translate(720 / 2, 1280/ 2, 0.0f);
+//	Director::shared->rotate(y * 50.0f, 0.0f, 0.0f, 1.0f);
+//	Director::shared->translate(-720/ 2, -1280/ 2, 0.0f);
+//	Director::shared->scale(2.0f, 1.0f, 1.0f);
 
 	if (program->getId()) {
 		GLuint attrib, uniform;
@@ -78,13 +109,16 @@ void Box::draw() {
 
 		attrib = program->getVertexAttribLocation((char *) "aPosition");
 		glEnableVertexAttribArray(attrib);
-		glVertexAttribPointer(attrib, 2, GL_FLOAT, GL_FALSE, 0, vertices);
+		glVertexAttribPointer(attrib, 3, GL_FLOAT, GL_FALSE, 0, POSITION);
+//		glVertexAttribPointer(attrib, 2, GL_FLOAT, GL_FALSE, 0, vertices);
 
 		attrib = program->getVertexAttribLocation((char *) "aColor");
 		glEnableVertexAttribArray(attrib);
-		glVertexAttribPointer(attrib, 4, GL_FLOAT, GL_FALSE, 0, colors);
+		glVertexAttribPointer(attrib, 4, GL_FLOAT, GL_FALSE, 0, COLOR);
+//		glVertexAttribPointer(attrib, 4, GL_FLOAT, GL_FALSE, 0, colors);
 
-		glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_SHORT, vertexIndices);
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+//		glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_SHORT, vertexIndices);
 	}
 
 }

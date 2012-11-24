@@ -1,5 +1,5 @@
 /*
- * simpleVertexShader.glsl
+ * simpleVertexShader.vsh.
  * Copyright (c) 2012, Hanoilabs.
  */
  

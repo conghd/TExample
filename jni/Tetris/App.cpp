@@ -126,6 +126,7 @@ bool App::setupGraphics(int w, int h) {
     printGLString("Extensions", GL_EXTENSIONS);
 
     LOGI("App", "setupGraphics(%d, %d)", w, h);
+    Director::shared->start();
 
     glViewport(0, 0, w, h);
     checkGlError("glViewport");
@@ -134,13 +135,19 @@ bool App::setupGraphics(int w, int h) {
     float half_height = (float) h * 0.5f;
     Director::shared->setMatrixMode(PROJECTION_MATRIX);
     Director::shared->loadIdentity();
-    Director::shared->setOrthoGraphic2D(-half_width,
-    							 	 	 half_width,
-    							 	 	-half_height,
-    							 	 	 half_height);
-    Director::shared->translate(-half_width, -half_height, 0.0f);
-    glDisable(GL_DEPTH_TEST);
-    glDepthMask(GL_FALSE);
+	Director::shared->setPerspective(45.0f,
+			(float) App::shared->getScreenWidth() / (float) App::shared->getScreenHeight(),
+			0.01f,
+			1000.0f,
+			0.0f);
+	glDisable(GL_CULL_FACE);
+//    Director::shared->setOrthoGraphic2D(-half_width,
+//    							 	 	 half_width,
+//    							 	 	-half_height,
+//    							 	 	 half_height);
+//    Director::shared->translate(-half_width, -half_height, 0.0f);
+//    glDisable(GL_DEPTH_TEST);
+//    glDepthMask(GL_FALSE);
 
     isRenderable = 1;
 
