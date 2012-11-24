@@ -16,6 +16,7 @@
 class FlashScreen : Screen {
 private:
 	Box *box;
+	Box *box2;
 
 public:
 	static const char *TAG;

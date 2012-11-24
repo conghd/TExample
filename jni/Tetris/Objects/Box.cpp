@@ -51,9 +51,6 @@ Box::~Box() {
 }
 
 void Box::draw() {
-	glClear( GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-	checkGlError("glClear");
-
 	Director::shared->setMatrixMode(MODELVIEW_MATRIX);
 	Director::shared->loadIdentity();
 	vec3 e = { 0.0f, -3.0f, 0.0f };
