@@ -11,6 +11,7 @@ const char *Box::TAG = "Box";
 
 Box::Box(float x, float y, float width, float height) :
 		width(width), height(height) {
+	uMVPMatrix = -1;
 	program = new Program("glsl/simpleVertexShader.vsh", "glsl/simpleFragShader.fsh");
 //    if (!gProgram) {
 	if (!program->getId()) {
@@ -35,7 +36,7 @@ Box::Box(float x, float y, float width, float height) :
 	colors[0] = colors[3] = colors[5] = colors[7] =
 			colors[10] = colors[11] = colors[12] = colors[13] = colors[15] = 1.0f;
 	colors[1] = colors[2] = colors[4] = colors[6] =
-			colors[8] = colors[9] = colors[14] = 0.0f;
+			colors[8] = colors[9] = colors[14] = 1.0f; //0.0f;
 }
 
 Box::~Box() {
@@ -60,14 +61,14 @@ void Box::draw() {
 //	glDisable(GL_CULL_FACE);
 
 //	vec3 e = { 0.0f, 0.0f, -1000.0f }; // eye
-	vec3 c = {0.0f, 0.0f, 0.0f };	// center
-	vec3 u = { 0.0f, 0.0f, 1.0f };	// up
+//	vec3 c = {0.0f, 0.0f, 0.0f };	// center
+//	vec3 u = { 0.0f, 0.0f, -1.0f };	// up
 
 //	vec3 e = { App::shared->getScreenWidth(), App::shared->getScreenHeight(), 1000.0f }; // eye
-	vec3 e = { -0.0f, -0.0f, -5.0f }; // eye
+//	vec3 e = { 0.0f, 0.001f, 1545.0f }; // eye
 //	vec3 c = { App::shared->getScreenWidth() / 2.0f, App::shared->getScreenHeight() / 2.0f, 0.0f };	// center
 //	vec3 u = { 0.0f, 0.0f, 1.0f };	// up
-	Director::shared->lookAt(&e, &c, &u);
+//	Director::shared->lookAt(&e, &c, &u);
 
 	static float y = 0.0f;
 //	static const float POSITION[ 12 ] = {
@@ -76,11 +77,12 @@ void Box::draw() {
 //		0.0f, 1280.0f,  0.0f,
 //		360.0f, 1280.0f,  0.0f // Top right
 //		};
+	static const int SIZE = 100;
 	static const float POSITION[ 12 ] = {
-		-0.5f, 0.0f, -0.5f, // Bottom left
-		 0.5f, 0.0f, -0.5f,
-		-0.5f, 0.0f,  0.5f,
-		 0.5f, 0.0f,  0.5f // Top right
+		-0.5f * SIZE, -0.5f * SIZE, 0.0f, // Bottom left
+		 0.5f * SIZE, -0.5f * SIZE, 0.0f,
+		-0.5f * SIZE,  0.5f * SIZE, 0.0f,
+		 0.5f * SIZE,  0.5f * SIZE, 0.0f // Top right
 		};
 
 	static const float COLOR[ 16 ] = {
@@ -101,24 +103,26 @@ void Box::draw() {
 		glUseProgram(program->getId());
 		checkGlError("glUseProgram");
 
-		uniform = program->getUniformLocation((char *)"uMVPMatrix" );
-		glUniformMatrix4fv(uniform,
+		if (uMVPMatrix == -1) {
+		uMVPMatrix = program->getUniformLocation((char *)"uMVPMatrix" );
+		glUniformMatrix4fv(uMVPMatrix,
 							1 /* How many 4x4 matrix */,
 							GL_FALSE /* Transpose the matrix? */,
 							(float *) Director::shared->getModelviewProjectionMatrix());
+		}
 
 		attrib = program->getVertexAttribLocation((char *) "aPosition");
 		glEnableVertexAttribArray(attrib);
-		glVertexAttribPointer(attrib, 3, GL_FLOAT, GL_FALSE, 0, POSITION);
-//		glVertexAttribPointer(attrib, 2, GL_FLOAT, GL_FALSE, 0, vertices);
+//		glVertexAttribPointer(attrib, 3, GL_FLOAT, GL_FALSE, 0, POSITION);
+		glVertexAttribPointer(attrib, 2, GL_FLOAT, GL_FALSE, 0, vertices);
 
 		attrib = program->getVertexAttribLocation((char *) "aColor");
 		glEnableVertexAttribArray(attrib);
-		glVertexAttribPointer(attrib, 4, GL_FLOAT, GL_FALSE, 0, COLOR);
-//		glVertexAttribPointer(attrib, 4, GL_FLOAT, GL_FALSE, 0, colors);
+//		glVertexAttribPointer(attrib, 4, GL_FLOAT, GL_FALSE, 0, COLOR);
+		glVertexAttribPointer(attrib, 4, GL_FLOAT, GL_FALSE, 0, colors);
 
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-//		glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_SHORT, vertexIndices);
+		glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_SHORT, vertexIndices);
 	}
 
 }

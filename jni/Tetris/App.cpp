@@ -135,21 +135,32 @@ bool App::setupGraphics(int w, int h) {
     float half_height = (float) h * 0.5f;
     Director::shared->setMatrixMode(PROJECTION_MATRIX);
     Director::shared->loadIdentity();
-	Director::shared->setPerspective(45.0f,
+	Director::shared->setPerspective(60.0f,
 			(float) App::shared->getScreenWidth() / (float) App::shared->getScreenHeight(),
 			0.01f,
-			1000.0f,
+			3550.0f,
 			0.0f);
 	glDisable(GL_CULL_FACE);
 //    Director::shared->setOrthoGraphic2D(-half_width,
 //    							 	 	 half_width,
 //    							 	 	-half_height,
 //    							 	 	 half_height);
-//    Director::shared->translate(-half_width, -half_height, 0.0f);
+    Director::shared->translate(-half_width, -half_height, 0.0f);
+//    vec3 c = {0.0f, 0.0f, 0.0f };	// center
+    vec3 c = { 0.0f, 0.0f, 0.0f };	// center
+    	vec3 u = { 0.0f, 0.0f, -1.0f };	// up
+
+//    	vec3 e = { 0.0f, 0.001f, 545.0f }; // eye
+    	vec3 e = { 0.0f, 0.0001f, 2.2566f * w }; // eye
+    //	vec3 c = { App::shared->getScreenWidth() / 2.0f, App::shared->getScreenHeight() / 2.0f, 0.0f };	// center
+    //	vec3 u = { 0.0f, 0.0f, 1.0f };	// up
+    	Director::shared->lookAt(&e, &c, &u);
 //    glDisable(GL_DEPTH_TEST);
 //    glDepthMask(GL_FALSE);
 
     isRenderable = 1;
+    glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     return true;
 }

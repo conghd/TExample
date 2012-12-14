@@ -1,6 +1,8 @@
 #ifndef APP_H
 #define APP_H
 
+#define PI 3.1415926535897932384626433832795f
+
 #include "Program.h"
 #include "Engine.h"
 #include "Director.h"
