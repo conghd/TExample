@@ -24,6 +24,8 @@ LOCAL_CFLAGS	:= -Werror -Wno-psabi
 #LOCAL_SRC_FILES += $(wildcard $(LOCAL_PATH)/*/*.cpp)
 FILE_LIST := $(wildcard $(LOCAL_PATH)/*.cpp)
 FILE_LIST += $(wildcard $(LOCAL_PATH)/**/*.cpp)
+FILE_LIST += $(wildcard $(LOCAL_PATH)/**/**/*.cpp)
+FILE_LIST += $(wildcard $(LOCAL_PATH)/**/**/**/*.cpp)
 
 #LOCAL_SRC_FILES :=\
 #	AssetManager.cpp \
